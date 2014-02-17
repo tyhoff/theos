@@ -1,6 +1,11 @@
 # my code
 
-export THEOS_DEVICE_IP=192.168.1.130
+# export THEOS_DEVICE_IP=169.254.159.41
+# export THEOS_DEVICE_IP=192.168.1.149
+export THEOS_DEVICE_IP=10.184.139.246
+# export THEOS_DEVICE_IP=192.168.1.122
+# export THEOS_DEVICE_IP=192.168.1.130
+
 
 one : clean ddeb all package
 
@@ -12,6 +17,11 @@ upload :
 	ssh vps 'setopt NULL_GLOB; rm -f /var/www/cydia.tyhoffman.com/public_html/deb_files/*$(shell echo $(TWEAK_NAME) | tr A-Z a-z)*'
 	scp com.* vps:/var/www/cydia.tyhoffman.com/public_html/deb_files
 	ssh vps 'cd /var/www/cydia.tyhoffman.com; bash /var/www/cydia.tyhoffman.com/script.sh'
+
+uploadmy :
+	ssh vps 'setopt NULL_GLOB; rm -f /var/www/mycydia.tyhoffman.com/public_html/deb_files/*$(shell echo $(TWEAK_NAME) | tr A-Z a-z)*'
+	scp com.* vps:/var/www/mycydia.tyhoffman.com/public_html/deb_files
+	ssh vps 'cd /var/www/mycydia.tyhoffman.com; bash /var/www/mycydia.tyhoffman.com/script.sh'
 
 
 # continue common.mk original code
